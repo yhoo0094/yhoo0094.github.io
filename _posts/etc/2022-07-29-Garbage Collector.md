@@ -9,8 +9,7 @@ author_profile: false
 ---
 ## Garbage Collection
 
-* Heap 영역의 메모리에서 사용하지 않는 인스턴스를 자동으로 삭제하는 행위
-*  JVM의 Garbage Collector가 수행
+* JVM에 의해 Heap 영역의 메모리에서 사용하지 않는 인스턴스를 자동으로 삭제하는 행위
 
 
 
@@ -28,15 +27,21 @@ author_profile: false
 
 \- 생명 주기가 짧은 객체 대상 영역
 
-\- 두 개의 Survivor space가 존재
-
 \- 해당 영역에서 발생되는 GC를 Minor GC 라고 하며 속도가 빠르다
+
+\- Eden space과 두 개의 Survivor space로 구성
 
 * Old Generation
 
 \- 생명 주기가 긴 대상 영역
 
-\- 해당 영역에서 발생되는 GC를 Major GC 라고 하며 속도가 느리다
+\- 해당 영역에서 발생되는 GC를 Major GC 라고 하며 Minor GC에 비해 속도가 느리다
+
+\- Young Generation에서 살아남은 객체가 Old Generation로 복사 된다
+
+\- 대부분 Young 영역보다 크게 할당하며, 크기가 큰 만큼 Young 영역보다 GC가 적게 발생한다
+
+
 
 * Sun JVM의 Heap 영역 메모리 동작 과정
 
@@ -76,7 +81,7 @@ author_profile: false
 
 * Garbage Collector의 Young Generation과 Old Generation은 무엇인가?
 
-\- 일반적은 자바 어플리케이션의 경우 짧게 사용 후 필요 없어지는 객체가 많습니다. **Young Generation에서는 Minor Garbage Collection을 통해 사용되고 있지 않거나 참조하고 있지 않는 객체를 빠르게 제거합니다. 제거 후 살아남은 객체는 일련의 과정을 거쳐 Old Generation으로 이동되며 Old Generation에서 발생하는 Major Garbage Collection은 Minor Garbage Collection에 비해 속도가 느립니다.**
+\- 자바 어플리케이션의 경우 짧게 사용 후 필요 없어지는 객체가 많습니다. **Young Generation에서는 생명 주기가 짧은 객체를 빠르게 제거합니다. 제거 후 살아남은 객체는 일련의 과정을 거쳐 Old Generation으로 복사되며 Old Generation은 Young Generation에 비해 일반적으로 Garbage Collection을 자주 수행하지 않으며, 시간도 더 오래 걸립니다.**
 
 
 
@@ -84,5 +89,7 @@ author_profile: false
 
 <a href="https://www.holaxprogramming.com/2013/07/20/java-jvm-gc/" target="_blank">JVM의 Garbage Collection</a>
 
-<a href="https://imasoftwareengineer.tistory.com/103" target="_blank">가비지 컬렉터(Garbage Collector)와 Mark & Sweep</a>
+Mark & Sweep: <a href="https://imasoftwareengineer.tistory.com/103" target="_blank">가비지 컬렉터(Garbage Collector)와 Mark & Sweep</a>
+
+자세한 내용: <a href="https://d2.naver.com/helloworld/1329" target="_blank">Java Garbage Collection</a>
 
