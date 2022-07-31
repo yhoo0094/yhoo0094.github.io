@@ -43,16 +43,16 @@ author_profile: false
 
 
 
-* Sun JVM의 Heap 영역 메모리 동작 과정
+* Young 영역 메모리 동작 과정
 
 1. Young Generations의 Eden에 객체 생성
-2. Eden이 Full이 되면 GC 발생, 살아남은 객체는 Survivor 영역 중 From Space로 이동
+2. Eden이 Full이 되면 GC 발생, 살아남은 객체는 Survivor 영역 중 이미 살아남은 객체가 존재하는 영역으로 이동
 
-=> Eden에서 사용되고 있지 않거나 참조하고 있지 않는 객체는 삭제하고 나머지는 From Space로 이동
+=> Eden에서 사용되고 있지 않거나 참조하고 있지 않는 객체는 삭제
 
-3. 다음 GC가 발생하면 From Space의 객체는 To Space로 이동
+3. 하나의 Survivor 영역이 가득 차게 되면 살아남은 객체를 다른 Survivor 영역으로 이동, 가득 찬 Survivor 영역은 빈 상태로 변경
 
-4. 다음 GC가 발생 시 객체가 여전히 살아있는 상태라면 Old Generationd 영역으로 이동
+4. 이 과정을 반복하다가 계속해서 살아남아 있는 객체는 Old Generationd 영역으로 이동
 
 <img src="../../images/2022-07-29-Garbage Collector/image-20220729094616336.png" alt="image-20220729094616336" style="zoom: 80%;" />
 
