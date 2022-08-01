@@ -54,7 +54,9 @@ author_profile: false
 
 4. 이 과정을 반복하다가 계속해서 살아남아 있는 객체는 Old Generationd 영역으로 이동
 
-<img src="../../images/2022-07-29-Garbage Collector/image-20220729094616336.png" alt="image-20220729094616336" style="zoom: 80%;" />
+<img src="../../images/2022-07-29-Garbage Collector/image-20220801182458703.png" alt="image-20220801182458703" style="zoom:67%;" />
+
+<img src="../../images/2022-07-29-Garbage Collector/image-20220801182846411.png" alt="image-20220801182846411" style="zoom:67%;" />
 
 
 
