@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "BeanCreationException"
+title: "톰캣 JDK 설정_BeanCreationException"
 categories: error
 tag: [error, spring]
 toc: true
