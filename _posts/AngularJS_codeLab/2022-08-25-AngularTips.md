@@ -11,7 +11,8 @@ author_profile: false
 
 * $scope.$apply();
   * 변수 값 바꾸고 나서 새로고침 진행할 때 사용
-
+  
+  
 
 
 
