@@ -60,7 +60,7 @@ SELECT nextval('Test') FROM DUAL;	#nextval 조회
 
 
 
-##  # 오류 사례
+##  # 오류 사례 1
 
 * 시퀀스의 다음 값을 가져오는 함수 생성할 때 아래와 같은 오류 발생
 
