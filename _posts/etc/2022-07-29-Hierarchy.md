@@ -30,3 +30,8 @@ Hierarchy란 계층을 의미합니다. Hierarchy 디자인은 구성 요소의 
 
 <a href="https://oldkong.tistory.com/6" target="_blank">Hierarchy란 무엇인가</a>
 
+
+
+## 보완/복습
+
+* 2023.10.06 복습 완료
