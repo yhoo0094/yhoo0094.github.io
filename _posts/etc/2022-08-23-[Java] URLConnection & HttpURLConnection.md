@@ -34,3 +34,8 @@ HttpURLConnection http = (HttpURLConnection) u.openConnection();
 
 * <a href="https://goddaehee.tistory.com/161" target="_blank">[Java] URLConnection & HttpURLConnection</a>
 
+
+
+## 보완/복습
+
+* 2023.10.10 복습

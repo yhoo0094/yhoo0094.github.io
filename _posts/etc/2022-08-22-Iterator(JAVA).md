@@ -84,3 +84,9 @@ public void method(){
 <a href="https://javanitto.tistory.com/10" target="_blank">[ JAVA ] Iterator 분석 (feat. ArrayList)</a>
 
 <a href="https://digiconfactory.tistory.com/entry/%EC%9E%90%EB%B0%94-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-12-3-Iterator-ArrayList-%EC%BB%AC%EB%A0%89%EC%85%98-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC" target="_blank">자바 튜토리얼 12 - 4 | Iterator, ArrayList | 컬렉션 프레임워크 |</a>
+
+
+
+## 보완/복습
+
+* 2023.10.10 복습
