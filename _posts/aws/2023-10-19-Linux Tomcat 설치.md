@@ -8,143 +8,73 @@ toc_sticky: true
 author_profile: false
 ---
 
-## Linux Tomcat 설치
+## JAVA 설치
 
-![image-20231018074142572](../../images/2023-10-18-EC2 생성/image-20231018074142572.png)
+* Java 설치 가능한 리스트 검색
 
-* EC2대시보드 - [인스턴스 시작] 클릭
+```
+yum list java*
+```
 
 
 
-<img src="../../images/2023-10-18-EC2 생성/image-20231018074314793.png" alt="image-20231018074314793" style="zoom:67%;" />
+* java 11 설치
 
-* 이름 입력
+``` 
+sudo yum install java-11-amazon-corretto.x86_64
+```
 
 
 
-<img src="../../images/2023-10-18-EC2 생성/image-20231018074450993.png" alt="image-20231018074450993" style="zoom: 67%;" />
+* java 버전 확인
 
-* 키 페어(로그인) - [새 키 페어 생성] 클릭
+```
+java -version
+```
 
 
 
-<img src="../../images/2023-10-18-EC2 생성/image-20231018074725600.png" alt="image-20231018074725600" style="zoom:67%;" />
+#### 참고
 
-* 키 페어 이름 입력 - ppk 선택(PuTTy로 접속하기 위해) - [키 페어 생성] 클릭
-* **다운로드 되는 .ppk 파일 잘 보관하기!**
+AWS EC2 Java 설치(https://vvshinevv.tistory.com/107)
 
 
 
-<img src="../../images/2023-10-18-EC2 생성/image-20231018075043100.png" alt="image-20231018075043100" style="zoom:67%;" />
+## Tomcat 설치
 
-* 네트워크 설정 - Firewall - 내IP 선택(다른 IP에서 접근 불가)
-* [인스턴스 시작] 클릭
+* 적당한 경로 설정
 
+```
+[ec2-user@ip-000-000-000-000 ~]$ mkdir server
+[ec2-user@ip-000-000-000-000 ~]$ cd server/
+```
 
 
-![image-20231018075419381](../../images/2023-10-18-EC2 생성/image-20231018075419381.png)
 
-* [RDS 데이터베이스 연결] 클릭
+* 톰캣 설치
 
+![image-20231019083449891](../../images/2023-10-19-Linux Tomcat 설치/image-20231019083449891.png)
 
+* 톰캣 공식 사이트(https://tomcat.apache.org/) 접속
+* Download - 원하는 tomcat 버전 - tar.gz(링크 주소 복사)
+* 명령창에 입력해서 압축파일 다운로드 및 압축 해제
 
-<img src="../../images/2023-10-18-EC2 생성/image-20231018075551467.png" alt="image-20231018075551467" style="zoom:67%;" />
+```
+[ec2-user@ip-000-000-000-000 server]$ wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.95/bin/apache-tomcat-8.5
+[ec2-user@ip-000-000-000-000 server]$ tar -zxvf apache-tomcat-8.5.95.tar.gz
+```
 
-* 인스턴스 선택
-* 생성한 RDS 데이터베이스 선택
-* [연결] 클릭
 
 
+* 톰캣 실행
 
-## 보안 그룹 설정하기
+```
+[ec2-user@ip-000-000-000-000 server]$ ./apache-tomcat-8.5.95/bin/startup.sh
+```
 
-<img src="../../images/2023-10-18-EC2 생성/image-20231018080759389.png" alt="image-20231018080759389" style="zoom:67%;" />
 
-* EC2 대시보드 - 인스턴스(실행 중)
 
+* 실행 확인
+  * 주소 예시: http://192.168.123.456:8080/
 
-
-![image-20231018081639422](../../images/2023-10-18-EC2 생성/image-20231018081639422.png)
-
-* 보안 그룹 - 보안 그룹 생성
-
-
-
-![image-20231018082230872](../../images/2023-10-18-EC2 생성/image-20231018082230872.png)
-
-* 보안 그룹 이름, 설명 입력
-* [규칙 추가]를 눌러 인바운드 규칙 설정
-  * 80, 8080포트는 어떤 ip에서 접속해도 상관 없지만 22포트 접속은 위험하므로 허용된 ip외에는 차단해야 한다!
-
-* 아래로 스크롤... - [보안 그룹 생성] 클릭
-
-
-
-![image-20231018082608517](../../images/2023-10-18-EC2 생성/image-20231018082608517.png)
-
-* EC2 - 인스턴스 - 인스턴스 선택 - 작업 - 보안- 보안 그룹 변경
-
-
-
-<img src="../../images/2023-10-18-EC2 생성/image-20231018082725557.png" alt="image-20231018082725557" style="zoom:67%;" />
-
-* 보안 그룹 선택 - 보안 그룹 추가 - 저장
-
-
-
-## 탄력적 IP 주소 할당
-
-* 탄력적 IP를 할당하지 않은 채로 EC2인스턴스를 재부팅하게 되면, IP주소가 변경되므로, 고정 ip를 할당하는 개념 
-
-![image-20231018082918668](../../images/2023-10-18-EC2 생성/image-20231018082918668.png)
-
-* EC2 - 탄력적 IP - 탄력적 IP 주소 할당
-
-
-
-<img src="../../images/2023-10-18-EC2 생성/image-20231018083015174.png" alt="image-20231018083015174" style="zoom:67%;" />
-
-* [할당] 클릭
-
-
-
-![image-20231018083116359](../../images/2023-10-18-EC2 생성/image-20231018083116359.png)
-
-* [탄력적 IP 주소 연결] 클릭
-
-
-
-<img src="../../images/2023-10-18-EC2 생성/image-20231018083206997.png" alt="image-20231018083206997" style="zoom:67%;" />
-
-* 인스턴스 선택 - 연결
-
-
-
-## PuTTy로 연결 테스트
-
-<img src="../../images/2023-10-18-EC2 생성/image-20231018090545167.png" alt="image-20231018090545167" style="zoom:67%;" />
-
-* Putty - IP입력
-
-
-
-<img src="../../images/2023-10-18-EC2 생성/image-20231018090703962.png" alt="image-20231018090703962" style="zoom:67%;" />
-
-* Connection - SSH - Auth - Credentials 이동 - 키 페어(로그인)에서 생성한 .ppk 파일 등록
-
-
-
-<img src="../../images/2023-10-18-EC2 생성/image-20231018185447580.png" alt="image-20231018185447580" style="zoom: 80%;" />
-
-* Connection - Data - Auto-login username - [ec2-user] 입력
-
-
-
-<img src="../../images/2023-10-18-EC2 생성/image-20231018185638714.png" alt="image-20231018185638714" style="zoom:80%;" />
-
-* Session - [Saved Sessions]에서 저장 대상 선택 - Save 
-* Open
-
-
-
-<img src="../../images/2023-10-18-EC2 생성/image-20231018202322223.png" alt="image-20231018202322223" style="zoom:80%;" />
+<img src="../../images/2023-10-19-Linux Tomcat 설치/image-20231019084514008.png" alt="image-20231019084514008" style="zoom:67%;" />
