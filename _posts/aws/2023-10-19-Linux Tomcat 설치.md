@@ -78,3 +78,9 @@ AWS EC2 Java 설치(https://vvshinevv.tistory.com/107)
   * 주소 예시: http://192.168.123.456:8080/
 
 <img src="../../images/2023-10-19-Linux Tomcat 설치/image-20231019084514008.png" alt="image-20231019084514008" style="zoom:67%;" />
+
+
+
+#### 참고
+
+* [Ubuntu Apache Tomcat 설치](https://passwd.tistory.com/entry/Ubuntu-Apache-Tomcat-%EC%84%A4%EC%B9%98)
