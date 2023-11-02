@@ -21,7 +21,11 @@ yum list java*
 * java 11 설치
 
 ``` 
+//11
 sudo yum install java-11-amazon-corretto.x86_64
+
+//8
+sudo yum install java-1.8.0-amazon-corretto.x86_64
 ```
 
 
@@ -60,7 +64,7 @@ AWS EC2 Java 설치(https://vvshinevv.tistory.com/107)
 * 명령창에 입력해서 압축파일 다운로드 및 압축 해제
 
 ```
-[ec2-user@ip-000-000-000-000 server]$ wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.95/bin/apache-tomcat-8.5
+[ec2-user@ip-000-000-000-000 server]$ wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.95/bin/apache-tomcat-8.5.95.tar.gz 
 [ec2-user@ip-000-000-000-000 server]$ tar -zxvf apache-tomcat-8.5.95.tar.gz
 ```
 
