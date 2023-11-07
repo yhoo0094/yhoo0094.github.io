@@ -95,3 +95,8 @@ Mark & Sweep: <a href="https://imasoftwareengineer.tistory.com/103" target="_bla
 
 자세한 내용: <a href="https://d2.naver.com/helloworld/1329" target="_blank">Java Garbage Collection</a>
 
+
+
+## 보완/복습
+
+* 2023.11.06 복습
