@@ -13,7 +13,7 @@ author_profile: false
 * Java 설치 가능한 리스트 검색
 
 ```
-yum list java*
+[ec2-user@ip-000-000-000-000 ~]$ yum list java*
 ```
 
 
@@ -22,10 +22,10 @@ yum list java*
 
 ``` 
 //11
-sudo yum install java-11-amazon-corretto.x86_64
+[ec2-user@ip-000-000-000-000 ~]$ sudo yum install java-11-amazon-corretto.x86_64
 
 //8
-sudo yum install java-1.8.0-amazon-corretto.x86_64
+[ec2-user@ip-000-000-000-000 ~]$ sudo yum install java-1.8.0-amazon-corretto.x86_64
 ```
 
 
@@ -33,7 +33,7 @@ sudo yum install java-1.8.0-amazon-corretto.x86_64
 * java 버전 확인
 
 ```
-java -version
+[ec2-user@ip-000-000-000-000 ~]$ java -version
 ```
 
 
