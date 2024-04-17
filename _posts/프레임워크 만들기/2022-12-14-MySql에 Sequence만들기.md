@@ -87,11 +87,13 @@ DELIMITER $$
 
 ![image-20230404203603336](../../images/2022-12-14-MySql에 Sequence만들기/image-20230404203603336.png)
 
-2. Confluence 권한 부여
+2. ~~Confluence 권한 부여~~
 
 ```sql
-GRANT ALL PRIVILEGES ON confluence.* TO 'hpp'@'%';
+GRANT ALL PRIVILEGES ON confluence.* TO 'hpp(계정 이름)'@'%';
 ```
+
+2. DB 재실행
 
 3. 기존 소스 실행
 
