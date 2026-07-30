@@ -1,0 +1,83 @@
+    SELECT 번호
+         , 이름
+         , 주소
+         , 주민번호
+         , 차량번호            
+         , 시작일
+         , 종료일
+         , 취업기간
+      FROM (
+            SELECT NVL(A.조합원번호, B.대리운전자번호)                          AS 번호
+                 , DECODE(A.조합원번호, NULL, B.대리운전자명 , A.조합원명)       AS 이름
+                 , DECODE(A.조합원번호, NULL, B.주소        , A.주소)          AS 주소
+                 , DECODE(A.조합원번호, NULL, B.주민번호     , A.주민번호)      AS 주민번호
+              FROM ( 
+                    SELECT 조합원번호
+                         , 주소
+                         , 조합원명 
+                         , DEC_B64('DAMO', 암호화주민번호 ) AS 주민번호
+                      FROM 테이블_조합원
+                     WHERE 암호화주민번호 = DEC_B64('DAMO', #{주민번호})
+                       AND 복지가입일자 = (
+                                        SELECT MAX(복지가입일자)
+                                          FROM 테이블_조합원
+                                         WHERE 암호화주민번호 = DEC_B64('DAMO', #{주민번호})
+                                       )
+                   ) A
+              FULL OUTER JOIN
+                   (
+                    SELECT 대리운전자번호 AS 번호
+                         , 주소
+                         , 대리운전자명
+                         , DEC_B64('DAMO', 암호화주민번호) AS 주민번호
+                      FROM 테이블_대리운전자
+                     WHERE 암호화주민번호 = DEC_B64('DAMO', #{주민번호})
+                   ) B 
+                ON A.주민번호 = B.주민번호
+           ) A
+         , (
+            SELECT 근무처
+                 , 차량번호
+                 , 시작일자
+                 , 종료일자
+              FROM (
+                    SELECT '개인택시' AS 근무처
+                         , 차량번호
+                         , 시작일자
+                         , 종료일자
+                      FROM 테이블_조합원 A
+                         , 테이블_조합원행정처리내역 B
+                     WHERE A.암호화주민번호 = DEC_B64('DAMO', #{주민번호})
+                       AND B.행정처리코드 IN ('04','05')
+                       AND A.조합원번호 = B.조합원번호
+                   )
+             UNION ALL
+           (
+            SELECT '개인.대리' AS 근무처
+                 , 차량번호
+                 , 시작일자
+                 , 종료일자
+              FROM 테이블_대리운전자 C, 테이블_대리운전자내역 D
+             WHERE C.암호화주민번호 = DEC_B64('DAMO', #{주민번호})
+               AND C.대리운전자번호  = D.대리운전자번호
+           ) 
+             ORDER BY 시작일자 DESC
+           ) B
+         , (
+            SELECT 취업기간
+              FROM (
+                    SELECT MONTHS_BETWEEN(NVL(종료일자,TO_CHAR(SYSDATE,'YYYYMMDD')), 시작일자) AS 취업기간
+                      FROM 테이블_조합원 A
+                         , 테이블_조합원행정처리내역 B
+                     WHERE A.암호화주민번호 = DEC_B64('DAMO', #{주민번호})
+                       AND B.행정처리코드 IN ('04','05')
+                       AND A.조합원번호 = B.조합원번호
+                     UNION ALL
+                    SELECT MONTHS_BETWEEN(NVL(종료일자,TO_CHAR(SYSDATE,'YYYYMMDD')), 시작일자) AS 취업기간
+                     FROM 테이블_대리운전자 C
+                        , 테이블_대리운전자내역 D
+                    WHERE C.암호화주민번호 = DEC_B64('DAMO', #{주민번호})
+                      AND C.대리운전자번호 = D.대리운전자번호
+                   )
+           ) C
+     ORDER BY 시작일자 DESC
